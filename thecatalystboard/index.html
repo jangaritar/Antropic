@@ -25,6 +25,24 @@
     <div class="content" id="terminalContent">
       <div class="main-title">The Catalyst Board</div>
       <div class="hall-of-fame">
+        <div class="countdown is-centered">
+          <div class="countdown-title">Complete these tasks before the countdown ends</div>
+          <div id="countdown" class="countdown-text has-text-weight-bold">1 day, 23 hours, 59 minutes, 59 seconds</div>
+        </div>
+        <script>
+          const countdownText = document.getElementById('countdown');
+          const countdownFunction = () => {
+            const now = new Date();
+            const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+            const timeDifference = midnight.getTime() - now.getTime();
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            countdownText.innerText = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+          };
+          setInterval(countdownFunction, 1000);
+        </script>
         <div class="content" id="content">
         </div>
       </div>

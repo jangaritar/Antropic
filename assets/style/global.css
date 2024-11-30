@@ -193,3 +193,13 @@ body {
     font-size: 0.7em;
   }
 }
+
+/** helpers */
+
+.is-centered {
+  text-align: center;
+}
+
+.has-text-weight-bold {
+  font-weight: bold;
+}
