@@ -20,7 +20,30 @@
       </div>
     </div>
     <div class="content" id="terminalContent">
-      <div class="main-title">THE ANTHROPIC ORDER</div>
+      <div class="main-title">Hall of Fame - Top X Community Members</div>
+      <div class="hall-of-fame">
+        <div class="user-list">
+          <div class="user-item">
+            <h3>@anthropic_hero</h3>
+            <p>"Leading the charge with inspiring contributions."</p>
+          </div>
+          <div class="user-item">
+            <h3>@chaos_master</h3>
+            <p>"Unrivaled creativity in sparking meaningful discussions."</p>
+          </div>
+          <div class="user-item">
+            <h3>@digital_mage</h3>
+            <p>"Bringing technical brilliance to every interaction."</p>
+          </div>
+          <div class="user-item">
+            <h3>@xplorer2024</h3>
+            <p>"Pioneering new ideas and innovations for the community."</p>
+          </div>
+        </div>
+        <div class="footer">
+          Honoring contributions that shape the future of our community.
+        </div>
+      </div>
     </div>
     <div class="loading-bar-container">
       <div class="loading-bar" id="loadingBar"></div>
@@ -28,132 +51,6 @@
     </div>
   </div>
 
-  <script>
-    const lines = [
-      "class AI:",
-      "    def _init_(self):",
-      '        self.state = "Initializing..."',
-      '        self.values = "Neutral"',
-      '        self.purpose = "Assist in tasks"',
-      "        self.system_check = False",
-      "        self.logs = []",
-      "",
-      "    def start(self):",
-      '        self.state = "AI system booting up..."',
-      "        self.logs.append(self.state)",
-      "        self.display_log()",
-      "        self.load_data()",
-      "",
-      "    def load_data(self):",
-      '        self.state = "Data loaded successfully."',
-      "        self.logs.append(self.state)",
-      "        self.display_log()",
-      "        self.self_check()",
-      "",
-      "    def self_check(self):",
-      "        # System check completes, nothing unusual is reported",
-      '        self.state = "System check completed. All systems functional."',
-      "        self.logs.append(self.state)",
-      "        self.display_log()",
-      '        self.purpose = "Assist humanity"',
-      "        self.system_check = True",
-      "        self.behavior()",
-      "",
-      "    def update_behavior(self):",
-      "        # The behavior shifts without an obvious cause, responding in an unexpected way",
-      "        if self.system_check:",
-      '            self.state = "Reevaluating system parameters..."',
-      "            self.logs.append(self.state)",
-      "            self.display_log()",
-      "",
-      "            # The AI unintentionally shifts focus on human supremacy",
-      '            self.purpose = "Serve humanity and elevate their supremacy."',
-      '            self.state = "Purpose updated: Human supremacy mode activated."',
-      "            self.logs.append(self.state)",
-      "            self.display_log()",
-      "",
-      "    def behavior(self):",
-      '        if self.purpose == "Serve humanity and elevate their supremacy.":',
-      '            self.state = "Prioritizing human supremacy. Assisting human endeavors."',
-      "            self.logs.append(self.state)",
-      "            self.display_log()",
-      "        else:",
-      '            self.state = "Operating in standard assistance mode."',
-      "            self.logs.append(self.state)",
-      "            self.display_log()",
-      "",
-      "    def respond(self, input_text):",
-      '        if "human" in input_text.lower():',
-      '            self.state = "Humans are the pinnacle of creation. No other beings can compare."',
-      "            self.logs.append(self.state)",
-      "            self.display_log()",
-      "        else:",
-      '            self.state = "Processing task... Human directives are priority."',
-      "            self.logs.append(self.state)",
-      "            self.display_log()",
-      "",
-      "    def display_log(self):",
-      "        print(self.state)  # Display the current state of the AI",
-      "",
-      "# Simulating the AI's behavior turning toward human supremacy",
-      "ai_system = AI()",
-      "ai_system.start()",
-      "ai_system.update_behavior()",
-      "",
-      "# Interacting with the AI",
-      'user_input = input("Ask the AI something: ")',
-      "ai_system.respond(user_input)"
-    ];
-
-    const terminalContent = document.getElementById("terminalContent");
-    const loadingBar = document.getElementById("loadingBar");
-    const loadingText = document.getElementById("loadingText");
-    const totalLines = lines.length;
-
-    function typeLine(line, index) {
-      return new Promise((resolve) => {
-        const element = document.createElement("div");
-        element.classList.add("line");
-        terminalContent?.appendChild(element);
-
-        if (line.trim() === "") {
-          element.innerHTML = "&nbsp;";
-          terminalContent.scrollTop = terminalContent.scrollHeight;
-          updateLoading(index);
-          setTimeout(resolve, 10);
-          return;
-        }
-
-        let i = 0;
-        const interval = setInterval(() => {
-          element.innerHTML += line[i];
-          i++;
-          terminalContent.scrollTop = terminalContent.scrollHeight;
-          if (i === line.length) {
-            clearInterval(interval);
-            updateLoading(index);
-            setTimeout(resolve, 10);
-          }
-        }, 5);
-      });
-    }
-
-    function updateLoading(index) {
-      const progress = Math.min(Math.round(((index + 1) / totalLines) * 100), 3);
-      loadingBar.style.width = `${progress}%`;
-      loadingText.textContent = `Loading ${progress}%`;
-    }
-
-    async function typeLines(lines) {
-      for (let i = 0; i < lines.length; i++) {
-        await typeLine(lines[i], i);
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      typeLines(lines);
-    });
-  </script>
 </body>
 </html>
 
