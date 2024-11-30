@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/style/global.css">
   <title>Hall of Chaos</title>
 </head>
+
 <body>
   <div class="terminal">
     <div class="title-bar">
@@ -16,38 +18,59 @@
       </div>
       <div class="button-group-right">
         <a href="https://x.com/anthroorder" target="_blank" class="button">X</a>
-        <a href="https://dexscreener.com/solana/63zQAnw5YdWb2fYSmDv6D29YgekTi181VAnFcqLrvT6C" target="_blank" class="button">Dexscreener</a>
+        <a href="https://dexscreener.com/solana/63zQAnw5YdWb2fYSmDv6D29YgekTi181VAnFcqLrvT6C" target="_blank"
+          class="button">Dexscreener</a>
       </div>
     </div>
     <div class="content" id="terminalContent">
       <div class="main-title">Hall of Fame - Top X Community Members</div>
       <div class="hall-of-fame">
-        <div class="user-list">
-          <div class="user-item">
-            <h3>@anthropic_hero</h3>
-            <p>"Leading the charge with inspiring contributions."</p>
-          </div>
-          <div class="user-item">
-            <h3>@chaos_master</h3>
-            <p>"Unrivaled creativity in sparking meaningful discussions."</p>
-          </div>
-          <div class="user-item">
-            <h3>@digital_mage</h3>
-            <p>"Bringing technical brilliance to every interaction."</p>
-          </div>
-          <div class="user-item">
-            <h3>@xplorer2024</h3>
-            <p>"Pioneering new ideas and innovations for the community."</p>
-          </div>
+        <div class="content" id="content">
         </div>
-        <div class="footer">
-          Honoring contributions that shape the future of our community.
-        </div>
+
       </div>
+
+      <script>
+        const content = document.getElementById("content");
+        const lines = [
+          "@anthropic_hero",
+          "Leading the charge with inspiring contributions. ",
+          " ",
+          "@chaos_master",
+          "Unrivaled creativity in sparking meaningful discussions.",
+          " ",
+          "@digital_mage",
+          "Bringing technical brilliance to every interaction.",
+          " ",
+          "@xplorer2024",
+          "Pioneering new ideas and innovations for the community.",
+          " ",
+          " ",
+          "Honoring contributions that shape the future of our community.",
+        ];
+        let lineIndex = 0;
+        let characterIndex = 0;
+        const interval = setInterval(() => {
+          if (characterIndex === 0) {
+            const lineElement = document.createElement("div");
+            lineElement.classList.add("line");
+            content.appendChild(lineElement);
+          }
+          const lineElement = content.children[lineIndex];
+          lineElement.innerText += lines[lineIndex][characterIndex];
+          characterIndex++;
+          if (characterIndex === lines[lineIndex].length) {
+            lineIndex++;
+            characterIndex = 0;
+          }
+          if (lineIndex === lines.length) clearInterval(interval);
+        }, 20);
+      </script>
     </div>
   </div>
 
 </body>
+
 </html>
 
 <!--hfhfhfsadsdasdasdash-->
