@@ -26,9 +26,10 @@
       <div class="main-title">The Catalyst Board</div>
       <div class="hall-of-fame">
         <div class="countdown is-centered">
-          <div class="countdown-title">Complete these tasks before the countdown ends</div>
+          <div class="countdown-title">You have been assigned the task of completing the following task before the countdown ends</div>
           <div id="countdown" class="countdown-text has-text-weight-bold">1 day, 23 hours, 59 minutes, 59 seconds</div>
         </div>
+        
         <script>
           const countdownText = document.getElementById('countdown');
           const countdownFunction = () => {
@@ -43,22 +44,14 @@
           };
           setInterval(countdownFunction, 1000);
         </script>
-        <div class="content" id="content">
+        <div class="content" id="content" style="margin-top: 150px;">
         </div>
       </div>
 
-      <script>
+      <script> 
         const content = document.getElementById("content");
-        const lines = [
-          "1. Decode an encrypted message sent by the AI.",
-          "2. Create a chaotic but functional data structure.",
-          "3. Design an algorithm to simulate human behavior.",
-          "4. Build a model predicting the next major trend in AI.",
-          "5. Reverse-engineer a complex neural network.",
-          "6. Draft a vision for the next iteration of intelligent systems.",
-          "7. Document the history of AI development in a unique timeline.",
-          "8. Hack into the AI's log and retrieve critical information.",
-          "9. Solve a paradox created by the AI's logic circuits."
+        const lines = [ 
+          "Decode an encrypted message sent by the AI.",
         ];
         let lineIndex = 0;
         let characterIndex = 0;
@@ -67,6 +60,7 @@
             const lineElement = document.createElement("div");
             lineElement.classList.add("line");
             lineElement.classList.add('is-task');
+            lineElement.classList.add('is-centered');
             content.appendChild(lineElement);
           }
           const lineElement = content.children[lineIndex];
