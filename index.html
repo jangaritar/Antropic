@@ -139,8 +139,9 @@
       });
     }
 
+    // modificador de barra de carga 
     function updateLoading(index) {
-      const progress = Math.min(Math.round(((index + 1) / totalLines) * 100), 3);
+      const progress = Math.min(Math.round(((index + 1) / totalLines) * 100), 4.7);
       loadingBar.style.width = `${progress}%`;
       loadingText.textContent = `Loading ${progress}%`;
     }
