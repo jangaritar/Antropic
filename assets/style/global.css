@@ -105,6 +105,18 @@ body {
   overflow: hidden;
   white-space: pre-wrap;
   word-wrap: break-word;
+
+  &.is-task {
+    border: solid 1px red;
+    border-radius: 5px;
+    padding: 5px;
+
+    &:hover {
+      background-color: red;
+      color: black;
+      cursor: pointer;
+    }
+  }
 }
 
 .main-title {

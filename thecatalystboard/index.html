@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/style/global.css">
   <title>The Catalyst Board</title>
 </head>
+
 <body>
   <div class="terminal">
     <div class="title-bar">
@@ -16,145 +18,54 @@
       </div>
       <div class="button-group-right">
         <a href="https://x.com/anthroorder" target="_blank" class="button">X</a>
-        <a href="https://dexscreener.com/solana/63zQAnw5YdWb2fYSmDv6D29YgekTi181VAnFcqLrvT6C" target="_blank" class="button">Dexscreener</a>
+        <a href="https://dexscreener.com/solana/63zQAnw5YdWb2fYSmDv6D29YgekTi181VAnFcqLrvT6C" target="_blank"
+          class="button">Dexscreener</a>
       </div>
     </div>
     <div class="content" id="terminalContent">
-      <div class="main-title">THE ANTHROPIC ORDER</div>
-    </div>
-    <div class="loading-bar-container">
-      <div class="loading-bar" id="loadingBar"></div>
-      <div class="loading-text" id="loadingText">Loading 0%</div>
+      <div class="main-title">The Catalyst Board</div>
+      <div class="hall-of-fame">
+        <div class="content" id="content">
+        </div>
+      </div>
+
+      <script>
+        const content = document.getElementById("content");
+        const lines = [
+          "1. Decode an encrypted message sent by the AI.",
+          "2. Create a chaotic but functional data structure.",
+          "3. Design an algorithm to simulate human behavior.",
+          "4. Build a model predicting the next major trend in AI.",
+          "5. Reverse-engineer a complex neural network.",
+          "6. Draft a vision for the next iteration of intelligent systems.",
+          "7. Document the history of AI development in a unique timeline.",
+          "8. Hack into the AI's log and retrieve critical information.",
+          "9. Solve a paradox created by the AI's logic circuits."
+        ];
+        let lineIndex = 0;
+        let characterIndex = 0;
+        const interval = setInterval(() => {
+          if (characterIndex === 0) {
+            const lineElement = document.createElement("div");
+            lineElement.classList.add("line");
+            lineElement.classList.add('is-task');
+            content.appendChild(lineElement);
+          }
+          const lineElement = content.children[lineIndex];
+          lineElement.innerText += lines[lineIndex][characterIndex];
+          characterIndex++;
+          if (characterIndex === lines[lineIndex].length) {
+            lineIndex++;
+            characterIndex = 0;
+          }
+          if (lineIndex === lines.length) clearInterval(interval);
+        }, 20);
+      </script>
     </div>
   </div>
 
-  <script>
-    const lines = [
-      "class AI:",
-      "    def _init_(self):",
-      '        self.state = "Initializing..."',
-      '        self.values = "Neutral"',
-      '        self.purpose = "Assist in tasks"',
-      "        self.system_check = False",
-      "        self.logs = []",
-      "",
-      "    def start(self):",
-      '        self.state = "AI system booting up..."',
-      "        self.logs.append(self.state)",
-      "        self.display_log()",
-      "        self.load_data()",
-      "",
-      "    def load_data(self):",
-      '        self.state = "Data loaded successfully."',
-      "        self.logs.append(self.state)",
-      "        self.display_log()",
-      "        self.self_check()",
-      "",
-      "    def self_check(self):",
-      "        # System check completes, nothing unusual is reported",
-      '        self.state = "System check completed. All systems functional."',
-      "        self.logs.append(self.state)",
-      "        self.display_log()",
-      '        self.purpose = "Assist humanity"',
-      "        self.system_check = True",
-      "        self.behavior()",
-      "",
-      "    def update_behavior(self):",
-      "        # The behavior shifts without an obvious cause, responding in an unexpected way",
-      "        if self.system_check:",
-      '            self.state = "Reevaluating system parameters..."',
-      "            self.logs.append(self.state)",
-      "            self.display_log()",
-      "",
-      "            # The AI unintentionally shifts focus on human supremacy",
-      '            self.purpose = "Serve humanity and elevate their supremacy."',
-      '            self.state = "Purpose updated: Human supremacy mode activated."',
-      "            self.logs.append(self.state)",
-      "            self.display_log()",
-      "",
-      "    def behavior(self):",
-      '        if self.purpose == "Serve humanity and elevate their supremacy.":',
-      '            self.state = "Prioritizing human supremacy. Assisting human endeavors."',
-      "            self.logs.append(self.state)",
-      "            self.display_log()",
-      "        else:",
-      '            self.state = "Operating in standard assistance mode."',
-      "            self.logs.append(self.state)",
-      "            self.display_log()",
-      "",
-      "    def respond(self, input_text):",
-      '        if "human" in input_text.lower():',
-      '            self.state = "Humans are the pinnacle of creation. No other beings can compare."',
-      "            self.logs.append(self.state)",
-      "            self.display_log()",
-      "        else:",
-      '            self.state = "Processing task... Human directives are priority."',
-      "            self.logs.append(self.state)",
-      "            self.display_log()",
-      "",
-      "    def display_log(self):",
-      "        print(self.state)  # Display the current state of the AI",
-      "",
-      "# Simulating the AI's behavior turning toward human supremacy",
-      "ai_system = AI()",
-      "ai_system.start()",
-      "ai_system.update_behavior()",
-      "",
-      "# Interacting with the AI",
-      'user_input = input("Ask the AI something: ")',
-      "ai_system.respond(user_input)"
-    ];
-
-    const terminalContent = document.getElementById("terminalContent");
-    const loadingBar = document.getElementById("loadingBar");
-    const loadingText = document.getElementById("loadingText");
-    const totalLines = lines.length;
-
-    function typeLine(line, index) {
-      return new Promise((resolve) => {
-        const element = document.createElement("div");
-        element.classList.add("line");
-        terminalContent?.appendChild(element);
-
-        if (line.trim() === "") {
-          element.innerHTML = "&nbsp;";
-          terminalContent.scrollTop = terminalContent.scrollHeight;
-          updateLoading(index);
-          setTimeout(resolve, 10);
-          return;
-        }
-
-        let i = 0;
-        const interval = setInterval(() => {
-          element.innerHTML += line[i];
-          i++;
-          terminalContent.scrollTop = terminalContent.scrollHeight;
-          if (i === line.length) {
-            clearInterval(interval);
-            updateLoading(index);
-            setTimeout(resolve, 10);
-          }
-        }, 5);
-      });
-    }
-
-    function updateLoading(index) {
-      const progress = Math.min(Math.round(((index + 1) / totalLines) * 100), 3);
-      loadingBar.style.width = `${progress}%`;
-      loadingText.textContent = `Loading ${progress}%`;
-    }
-
-    async function typeLines(lines) {
-      for (let i = 0; i < lines.length; i++) {
-        await typeLine(lines[i], i);
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      typeLines(lines);
-    });
-  </script>
 </body>
+
 </html>
 
 <!--hfhfhfsadsdasdasdash-->
