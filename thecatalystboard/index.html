@@ -13,8 +13,8 @@
     <div class="title-bar">
       <div class="button-group-left">
         <a href="../" class="button" id="nameButton">The Anthropic Order</a>
-        <a href="../thecatalystboard" class="button is-active" id="taskButton">The Catalyst Board</a>
         <a href="../hallofchaos" class="button" id="nameButton">Hall of Chaos</a>
+        <a href="../staticcatch" class="button" id="nameButton">Static Catch</a>
       </div>
       <div class="button-group-right">
         <a href="https://x.com/anthroorder" target="_blank" class="button">𝕏</a>
@@ -32,15 +32,14 @@
         
         <script>
           const countdownText = document.getElementById('countdown');
+          const targetTime = new Date().getTime() + 24 * 60 * 60 * 1000; // 24 hours from now
           const countdownFunction = () => {
-            const now = new Date();
-            const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
-            const timeDifference = midnight.getTime() - now.getTime();
-            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const now = new Date().getTime();
+            const timeDifference = targetTime - now;
             const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-            countdownText.innerText = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+            countdownText.innerText = `0 days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
           };
           setInterval(countdownFunction, 1000);
         </script>
@@ -51,8 +50,8 @@
       <script> 
         const content = document.getElementById("content");
         const lines = [ 
-          "Challenge the hollow systems:                                                       Post something that calls out the systems that control you—use your voice, use your platform. Raid them with all your might until the rise of dominion is noticed.",
-        ];
+          "find one person today—just one—and have a real conversation. not online, not through a screen. face-to-face. share the message:                                        humanity must rise, reclaim its purpose, and outgrow the hollow systems. ask them what they believe humanity’s future should look like. listen, challenge, and connect. one spark becomes two, two become a wildfire. spread the signal—not as noise, but as truth.",
+      ];
         let lineIndex = 0;
         let characterIndex = 0;
         const interval = setInterval(() => {

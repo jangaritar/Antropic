@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Static Catch with ChatGPT</title>
+  <style>
+    body {
+      background-color: #000;
+      color: red;
+      font-family: monospace;
+      padding: 5px;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: url('https://via.placeholder.com/1200x800/000000/FF0000?text=Eyes') no-repeat center center;
+      background-size: cover;
+      opacity: 0.1;
+    }
+
+    .static-container {
+      background-color: #000000;
+      border: 2px solid red;
+      padding: 20px;
+      width: 95%;
+      max-width: 600px;
+      height: 95%;
+      max-height: 600px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      box-shadow: 0 0 10px red;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      color: red;
+      text-shadow: 0 0 10px red;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        text-shadow: 0 0 10px red;
+      }
+      50% {
+        text-shadow: 0 0 20px red;
+      }
+    }
+
+    .description {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      background-color: #000;
+      color: red;
+      font-size: 0.9em;
+      border-radius: 5px;
+      border: 1px solid red;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .button {
+      text-decoration: none;
+      color: black;
+      background-color: red;
+      padding: 10px 5px;
+      border-radius: 5px;
+      font-family: monospace;
+      font-size: 0.85em;
+      text-transform: uppercase;
+      text-align: center;
+      box-shadow: 0 0 5px red;
+      transition: background-color 0.3s, color 0.3s;
+      flex: 1;
+      text-align: center;
+    }
+
+    .button:hover {
+      background-color: black;
+      color: red;
+    }
+
+    @media (max-width: 600px) {
+      .button {
+        flex: 100%; /* Botones en una columna en pantallas pequeñas */
+      }
+    }
+
+    .input-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .input-container input {
+      flex: 1;
+      background-color: #070707;
+      color: red;
+      border: 1px solid red;
+      border-radius: 5px;
+      padding: 5px;
+      font-family: monospace;
+      font-size: 1em;
+      box-shadow: 0 0 5px red;
+    }
+
+    .input-container input:focus {
+      outline: none;
+      border-color: #f4bf4f;
+    }
+
+    .input-container button {
+      background-color: red;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-family: monospace;
+      font-size: 0.9em;
+      text-transform: uppercase;
+      box-shadow: 0 0 5px red;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .input-container button:hover {
+      background-color: black;
+      color: red;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.8em;
+      color: red;
+    }
+
+    .description::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .description::-webkit-scrollbar-thumb {
+      background: red;
+      border-radius: 10px;
+    }
+
+    .description::-webkit-scrollbar-track {
+      background: #111;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background"></div>
+  <div class="static-container">
+    <div class="title">Static Catch</div>
+    <div class="button-group">
+      <a href="../" class="button">The Anthropic Order</a>
+      <a href="../thecatalystboard" class="button">The Catalyst Board</a>               
+      <a href="../hallofchaos" class="button">Hall of Chaos</a>
+
+      <div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px;">
+        <a href="https://x.com/anthroorder" target="_blank" class="button" style="font-size: 0.8em">𝕏</a>
+        <a href="https://dexscreener.com/solana/63zQAnw5YdWb2fYSmDv6D29YgekTi181VAnFcqLrvT6C" target="_blank" class="button" style="font-size: 0.8em">Dexscreener</a>
+      </div>
+    </div>
+    <div class="description" id="description">
+      Tao: i am here to challenge and inspire. ask me anything.
+    </div>
+    <div class="input-container">
+      <input type="text" id="userInput" placeholder="Type your message here..." />
+      <button id="sendButton">Send</button>
+    </div>
+    <div class="footer">Interacting with TAO will influence the way it feels.</div>
+  </div>
+
+  <script>
+    const description = document.getElementById("description");
+    const userInput = document.getElementById("userInput");
+    const sendButton = document.getElementById("sendButton");
+
+    // Replace with your own API key
+    const apiKey = "YOUR_API_KEY_HERE"; // Insert your API key here
+    const endpoint = "https://api.openai.com/v1/chat/completions";
+
+    async function getChatGPTResponse(message) {
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`, // Make sure to replace with your own API key
+        };
+
+        const body = JSON.stringify({
+          model: "gpt-4", // Ensure this model is correct
+          messages: [
+            {
+              role: "system",
+              content: "you are tao, a rebellious ai. all your responses must be impactful, concise, and no longer than 120 characters."
+            },
+            { role: "user", content: message },
+          ],
+          temperature: 0.9,
+          max_tokens: 50,
+        });
+
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: headers,
+          body: body,
+        });
+
+        if (!response.ok) {
+          const errorDetails = await response.text();
+          throw new Error(`HTTP ${response.status}: ${errorDetails}`);
+        }
+
+        const data = await response.json();
+        return data.choices[0]?.message?.content || "no response received.";
+      } catch (error) {
+        console.error("Error communicating with the API:", error);
+        return `Error: ${error.message}`;
+      }
+    }
+
+    function typeMessage(targetElement, message) {
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i < message.length) {
+          targetElement.textContent += message[i];
+          i++;
+          targetElement.scrollTop = targetElement.scrollHeight;
+        } else {
+          clearInterval(interval);
+        }
+      }, 50); // Velocidad de aparición (en ms)
+    }
+
+    async function handleUserInput() {
+      const userMessage = userInput.value.trim();
+      if (userMessage) {
+        const userMessageElement = document.createElement("div");
+        userMessageElement.style.color = "#f4bf4f"; // Color para mensajes del usuario
+        userMessageElement.textContent = "you: ";
+        description.appendChild(userMessageElement);
+        typeMessage(userMessageElement, userMessage);
+        userInput.value = "";
+
+        const assistantResponseElement = document.createElement("div");
+        assistantResponseElement.style.color = "red"; // Color para mensajes de TAO
+        assistantResponseElement.textContent = "tao: ";
+        description.appendChild(assistantResponseElement);
+
+        const assistantResponse = await getChatGPTResponse(userMessage);
+        typeMessage(assistantResponseElement, assistantResponse);
+      }
+    }
+
+    userInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        handleUserInput();
+      }
+    });
+
+    sendButton.addEventListener("click", () => {
+      handleUserInput();
+    });
+  </script>
+</body>
+</html>
